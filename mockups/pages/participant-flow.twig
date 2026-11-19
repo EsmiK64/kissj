@@ -1,0 +1,398 @@
+{% extends "pages/_admin-subpage-shell.twig" %}
+{% from "components/_macros.twig" import splitTile, qrPlaceholder %}
+{% set sectionTitle = 'Registrace účastníka (Návrh)' %}
+{% set pageTitle = 'Registrace účastníka – kissj Mockup' %}
+
+{% block pageContent %}
+<div class="admin-card" style="padding: 16px 22px; margin-bottom: 16px;">
+    <div class="row-wrap" style="justify-content: space-between;">
+        <div>
+            <h2 style="margin: 0;">Registrace z pohledu účastníka &amp; vedoucího</h2>
+            <span class="text-small text-muted">Přepněte krok registrace níže pro otestování celého průchodu v kissj.</span>
+        </div>
+        <a href="/alt-1-command-tiles.twig" class="btn btn-small btn-grey"><i class="material-icons">arrow_back</i> Zpět do Adminu</a>
+    </div>
+</div>
+
+<div class="pflow-tabs">
+    <input type="radio" name="pflow-step" id="pf-events">
+    <input type="radio" name="pflow-step" id="pf-login">
+    <input type="radio" name="pflow-step" id="pf-role">
+    <input type="radio" name="pflow-step" id="pf-open" checked>
+    <input type="radio" name="pflow-step" id="pf-edit">
+    <input type="radio" name="pflow-step" id="pf-paid">
+
+    <div class="role-tab-bar" role="tablist" aria-label="Fáze registrace účastníka">
+        <label for="pf-events" class="role-tab-label">0. Výběr akce (Landing)</label>
+        <label for="pf-login" class="role-tab-label">1. Přihlášení</label>
+        <label for="pf-role" class="role-tab-label">2. Výběr role</label>
+        <label for="pf-open" class="role-tab-label">3. Otevřená registrace (Vedoucí)</label>
+        <label for="pf-edit" class="role-tab-label">3b. Upravit sebe</label>
+        <label for="pf-paid" class="role-tab-label">4. Zaplaceno (Vstupenka, SFH, eventApp)</label>
+    </div>
+
+    <div class="pflow-panels">
+        {# ==================== 0. VÝBĚR AKCE (LANDING) ==================== #}
+        <div class="pflow-panel pf-panel-events">
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <div>
+                        <h2>Aktivní akce v kissj</h2>
+                        <span class="text-muted">Výběr akce na úvodní stránce kissj.</span>
+                    </div>
+                </div>
+                <div class="tile-grid">
+                    {{ splitTile('Obrok 27', '14.–16. 5. 2027 · Roveři a rangers', '14', 'dní zbývá', 'pf-login', 'label') }}
+                    {{ splitTile('Navigamus 27', 'Vodní skauti · Plzeň', '62', 'dní zbývá', 'pf-login', 'label') }}
+                    {{ splitTile('CEJ 26', 'Central European Jamboree', 'CZ', 'otevřeno', 'pf-login', 'label') }}
+                </div>
+            </div>
+        </div>
+
+        {# ==================== 1. PŘIHLÁŠENÍ ==================== #}
+        <div class="pflow-panel pf-panel-login">
+            <ul class="steps">
+                <li class="step is-active">Přihlášení</li>
+                <li class="step">Úprava údajů</li>
+                <li class="step">Uzamčeno</li>
+                <li class="step">Schváleno</li>
+                <li class="step">Zaplaceno</li>
+            </ul>
+            <div class="two-cards">
+                <div class="admin-card">
+                    <h2>Přihlášení na Obrok 27</h2>
+                    <p class="text-muted">Pro členy Junáka doporučujeme přihlášení přes SkautIS – automaticky ověří členství.</p>
+                    <a href="#skautis" class="btn btn-block"><i class="material-icons">verified_user</i> Přihlásit přes SkautIS</a>
+                    <p class="text-inside-line">nebo</p>
+                    <div class="form-group">
+                        <label for="pf-email" class="text-small">E-mail (pro hosty / bez SkautIS):</label>
+                        <input id="pf-email" class="modern-input" type="email" placeholder="jan@skaut.cz" style="width: 100%; margin-top: 4px;">
+                    </div>
+                    <button type="button" class="btn btn-block btn-grey" data-action="toast">Poslat přihlašovací odkaz</button>
+                </div>
+                <div class="admin-card">
+                    <h3>Jak registrace probíhá</h3>
+                    <ol style="padding-left: 20px; line-height: 1.7;">
+                        <li>Přihlásíš se přes SkautIS nebo e-mail.</li>
+                        <li>Vybereš si svou roli na akci.</li>
+                        <li>Vyplníš údaje (případně přidáš členy družiny).</li>
+                        <li>Uzamkneš registraci a počkáš na schválení.</li>
+                        <li>Zaplatíš a odemkne se ti <b>vstupenka, SFH a eventApp</b>.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        {# ==================== 2. VÝBĚR ROLE ==================== #}
+        <div class="pflow-panel pf-panel-role">
+            <ul class="steps">
+                <li class="step is-active">Přihlášení</li>
+                <li class="step">Úprava údajů</li>
+                <li class="step">Uzamčeno</li>
+                <li class="step">Schváleno</li>
+                <li class="step">Zaplaceno</li>
+            </ul>
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <div>
+                        <h2>Vyber si svou roli na akci</h2>
+                        <span class="text-muted">Popis i zbývající kapacita jsou přímo v každé kartě – není třeba luštit dva sloupce.</span>
+                    </div>
+                </div>
+
+                {# Na mezinárodních akcích (např. CEJ) si účastník volí i svůj kontingent #}
+                <div class="admin-card admin-card-nested" style="margin-bottom: 18px;">
+                    <div class="row-wrap" style="justify-content: space-between;">
+                        <div>
+                            <strong>Kontingent (u mezinárodních akcí)</strong>
+                            <div class="text-small text-muted">Na akcích s kontingenty (např. CEJ) se nejprve vybere země / kontingent.</div>
+                        </div>
+                        <select class="modern-select" aria-label="Výběr kontingentu">
+                            <option value="cs" selected>Český kontingent (CZ)</option>
+                            <option value="sk">Slovenský kontingent (SK)</option>
+                            <option value="pl">Polský kontingent (PL)</option>
+                            <option value="hu">Maďarský kontingent (HU)</option>
+                            <option value="eu">Evropský / Ostatní (EU)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="tile-grid">
+                    {{ splitTile('Vedoucí družiny (PL)', 'Registruješ sebe i celou družinu (4–8 lidí).', '19', 'volných', '', 'button') }}
+                    {{ splitTile('IST (Servisní tým)', 'Pomáháš s chodem akce a programem.', '69', 'volných', '', 'button') }}
+                    {{ splitTile('Technický tým (TTL)', 'Registruješ technický tým a jeho členy.', 'TTL', 'pozvánka', '', 'button') }}
+                </div>
+            </div>
+        </div>
+
+        {# ==================== 3. OTEVŘENÁ REGISTRACE (VEDOUCÍ DRUŽINY) ==================== #}
+        <div class="pflow-panel pf-panel-open">
+            <ul class="steps">
+                <li class="step is-active">Přihlášení</li>
+                <li class="step is-active">Úprava údajů</li>
+                <li class="step">Uzamčeno</li>
+                <li class="step">Schváleno</li>
+                <li class="step">Zaplaceno</li>
+            </ul>
+
+            {# Jasný checklist co zbývá před uzamčením #}
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <div>
+                        <span class="pill pill-info">Vedoucí družiny</span>
+                        <h2 style="margin-top: 6px;">Družina Lišky – Jan Novák</h2>
+                    </div>
+                    <span class="pill pill-warn">Zbývá dokončit 2 věci před uzamčením</span>
+                </div>
+
+                <div class="checkin-checklist" style="margin-top: 0;">
+                    <div class="checkin-step">
+                        <span class="checkin-step-main"><i class="material-icons" style="color: #3d7a22;">check_circle</i><span>Moje údaje (Jan Novák)</span></span>
+                        <div class="row-wrap">
+                            <span class="pill pill-ok">Vyplněno</span>
+                            <label for="pf-edit" class="btn btn-small btn-grey" style="cursor: pointer;">Upravit</label>
+                        </div>
+                    </div>
+                    <div class="checkin-step" style="border-color: var(--color-accent);">
+                        <span class="checkin-step-main"><i class="material-icons" style="color: var(--color-accent);">warning</i><span>Členové družiny (<span id="pf-member-count">3</span> / min. 4)</span></span>
+                        <div class="row-wrap">
+                            <span class="pill pill-err" id="pf-member-status">Chybí min. 1 člen + 1× nouzový kontakt</span>
+                            <button type="button" class="btn btn-small" id="open-add-member-modal"><i class="material-icons">person_add</i> Přidat člena</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-card-header" style="margin-top: 18px;">
+                    <h3>Seznam členů družiny (<span id="pf-member-count-head">3</span>)</h3>
+                    <span class="text-small text-muted">Kód pro připojení: <code>AB12CD</code></span>
+                </div>
+                <div class="table-wrap" style="margin-bottom: 18px;">
+                    <table class="data-table" id="pf-member-table">
+                        <thead>
+                            <tr><th>Jméno</th><th>Stav údajů</th><th>SkautIS</th><th>Strava</th><th>Akce</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><b>Klára Dvořáková</b></td>
+                                <td><span class="pill pill-ok">Kompletní</span></td>
+                                <td><span class="pill pill-ok">Propojeno</span></td>
+                                <td>Bezlepková</td>
+                                <td><a href="#edit-p" class="btn btn-mini btn-grey">Upravit</a></td>
+                            </tr>
+                            <tr>
+                                <td><b>Jakub Horák</b></td>
+                                <td><span class="pill pill-err">Chybí nouzový kontakt</span></td>
+                                <td><span class="pill pill-warn">Nepropojeno</span></td>
+                                <td>Normální</td>
+                                <td><a href="#edit-p" class="btn btn-mini">Doplnit</a></td>
+                            </tr>
+                            <tr>
+                                <td><b>Tereza Králová</b></td>
+                                <td><span class="pill pill-ok">Kompletní</span></td>
+                                <td><span class="pill pill-ok">Propojeno</span></td>
+                                <td>Normální</td>
+                                <td><a href="#edit-p" class="btn btn-mini btn-grey">Upravit</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <button type="button" class="btn btn-block" id="open-lock-modal">
+                    <i class="material-icons">lock</i> Uzamknout registraci a odeslat ke schválení
+                </button>
+            </div>
+        </div>
+
+        {# ==================== 3b. UPRAVIT SEBE (OSOBNÍ ÚDAJE) ==================== #}
+        <div class="pflow-panel pf-panel-edit">
+            <ul class="steps">
+                <li class="step is-active">Přihlášení</li>
+                <li class="step is-active">Úprava údajů</li>
+                <li class="step">Uzamčeno</li>
+                <li class="step">Schváleno</li>
+                <li class="step">Zaplaceno</li>
+            </ul>
+
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <div>
+                        <h2>Upravit moje údaje (Jan Novák)</h2>
+                        <span class="text-muted">Pole jsou rozdělena do logických sekcí místo jednoho dlouhého seznamu.</span>
+                    </div>
+                    <label for="pf-open" class="btn btn-small btn-grey" style="cursor: pointer;"><i class="material-icons">arrow_back</i> Zpět</label>
+                </div>
+
+                <div class="admin-card admin-card-nested" style="margin-bottom: 16px;">
+                    <h3>1. Základní &amp; oddílové údaje</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+                        <label class="text-small">Jméno <span class="pill pill-info">Povinné</span>
+                            <input class="modern-input" type="text" value="Jan" style="width: 100%; margin-top: 4px;" required>
+                        </label>
+                        <label class="text-small">Příjmení <span class="pill pill-info">Povinné</span>
+                            <input class="modern-input" type="text" value="Novák" style="width: 100%; margin-top: 4px;" required>
+                        </label>
+                        <label class="text-small">Přezdívka
+                            <input class="modern-input" type="text" value="Honza" style="width: 100%; margin-top: 4px;">
+                        </label>
+                        <label class="text-small">Datum narození <span class="pill pill-info">Povinné</span>
+                            <input class="modern-input" type="date" value="2006-04-12" style="width: 100%; margin-top: 4px;" required>
+                        </label>
+                        <label class="text-small">Název družiny <span class="pill pill-info">Povinné</span>
+                            <input class="modern-input" type="text" value="Družina Lišky" style="width: 100%; margin-top: 4px;" required>
+                        </label>
+                        <label class="text-small">Jednotka / středisko <span class="pill pill-info">Povinné</span>
+                            <input class="modern-input" type="text" value="213.04 Středisko Maják" style="width: 100%; margin-top: 4px;" required>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="admin-card admin-card-nested" style="margin-bottom: 16px;">
+                    <h3>2. Kontakt &amp; nouzový kontakt</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+                        <label class="text-small">Telefon <span class="pill pill-info">Povinné</span>
+                            <input class="modern-input" type="tel" value="+420 777 111 222" style="width: 100%; margin-top: 4px;" required>
+                        </label>
+                        <label class="text-small">Nouzový kontakt (ICE) <span class="pill pill-info">Povinné</span>
+                            <input class="modern-input" type="text" value="+420 602 333 444 (matka)" style="width: 100%; margin-top: 4px;" required>
+                        </label>
+                        <label class="text-small">Adresa trvalého bydliště
+                            <input class="modern-input" type="text" value="Lipová 12, Praha 6" style="width: 100%; margin-top: 4px;">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="admin-card admin-card-nested" style="margin-bottom: 18px;">
+                    <h3>3. Strava, zdraví &amp; poznámky</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+                        <label class="text-small">Stravování <span class="pill pill-info">Povinné</span>
+                            <select class="modern-select" style="width: 100%; margin-top: 4px;">
+                                <option value="normal" selected>Normální</option>
+                                <option value="veggie">Vegetariánská</option>
+                                <option value="gf">Bezlepková</option>
+                                <option value="other">Jiné</option>
+                            </select>
+                        </label>
+                        <label class="text-small">Zdravotní omezení / léky
+                            <input class="modern-input" type="text" placeholder="Např. alergie, astma…" style="width: 100%; margin-top: 4px;">
+                        </label>
+                        <label class="text-small">Poznámka pro organizátory
+                            <input class="modern-input" type="text" value="Přijedeme vlakem v pátek dopoledne." style="width: 100%; margin-top: 4px;">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="cta-grid" style="margin-bottom: 0;">
+                    <label for="pf-open" class="btn btn-accent" id="pf-save-self" style="cursor: pointer;"><i class="material-icons">save</i> Uložit moje údaje</label>
+                    <label for="pf-open" class="btn btn-grey" style="cursor: pointer;"><i class="material-icons">arrow_back</i> Zpět bez uložení</label>
+                </div>
+            </div>
+        </div>
+
+        {# ==================== 4. ZAPLACENO (VSTUPENKA, SFH, EVENTAPP) ==================== #}
+        <div class="pflow-panel pf-panel-paid">
+            <ul class="steps">
+                <li class="step is-active">Přihlášení</li>
+                <li class="step is-active">Úprava údajů</li>
+                <li class="step is-active">Uzamčeno</li>
+                <li class="step is-active">Schváleno</li>
+                <li class="step is-active">Zaplaceno</li>
+            </ul>
+
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <div>
+                        <span class="pill pill-ok">Vše zaplaceno · Jedeš na Obrok 27!</span>
+                        <h2 style="margin-top: 6px;">Družina Lišky – Jan Novák</h2>
+                    </div>
+                    <a href="#receipt" class="btn btn-small btn-grey"><i class="material-icons">receipt</i> Potvrzení (PDF)</a>
+                </div>
+
+                <div class="two-cards" style="align-items: stretch;">
+                    <div class="admin-card admin-card-nested" style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                        <h3>Tvoje vstupenka na bránu (Entry)</h3>
+                        <p class="text-small text-muted">Ukaž tento QR kód při příjezdu na akci (Tie code: <code>AB12CD</code>).</p>
+                        {{ qrPlaceholder(160, 'Vstupenka QR kód') }}
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 14px;">
+                        <div class="admin-card admin-card-nested">
+                            <div class="admin-card-header" style="margin-bottom: 8px;">
+                                <strong>1. Bezpečnostní příprava (SFH)</strong>
+                                <span class="pill pill-warn">Zbývá vyplnit</span>
+                            </div>
+                            <p class="text-small text-muted">Vyplň před příjezdem – kontroluje se na vstupní bráně.</p>
+                            <a href="https://skautdevs.github.io/bezpecny-navigamus/" target="_blank" class="btn btn-block"><i class="material-icons">verified_user</i> Spustit SFH kvíz</a>
+                        </div>
+
+                        <div class="admin-card admin-card-nested">
+                            <div class="admin-card-header" style="margin-bottom: 8px;">
+                                <strong>2. Programy v eventApp</strong>
+                                <span class="pill pill-ok">Přihlašování otevřeno</span>
+                            </div>
+                            <p class="text-small text-muted">Výběr programů a mapa areálu běží v eventApp se stejným přihlášením.</p>
+                            <a href="https://event.skauting.cz/" target="_blank" class="btn btn-block btn-grey"><i class="material-icons">open_in_new</i> Otevřít eventApp</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Modal pro potvrzení uzamčení registrace (místo samostatné stránky closeRegistration.twig) #}
+<dialog id="lock-modal" class="prog-modal" aria-labelledby="lock-modal-title">
+    <div class="admin-card-header">
+        <h3 id="lock-modal-title" style="margin: 0;">Uzamknout registraci?</h3>
+        <button type="button" class="btn btn-small btn-grey" id="lock-modal-close" aria-label="Zavřít">✕</button>
+    </div>
+    <p>Po uzamčení už nepůjde měnit základní údaje ani přidávat členy družiny. Registrace se odešle ke schválení organizátorům.</p>
+    <label style="display: flex; align-items: flex-start; gap: 10px; margin: 14px 0; cursor: pointer;">
+        <input type="checkbox" id="lock-gdpr-check">
+        <span>Souhlasím se zpracováním osobních údajů pro účely akce Obrok 27.</span>
+    </label>
+    <button type="button" class="btn btn-block btn-accent" id="lock-modal-confirm"><i class="material-icons">lock</i> Potvrdit a uzamknout</button>
+</dialog>
+
+{# Modal: Přidat člena družiny (ze SkautISu nebo ručně) #}
+<dialog id="add-member-modal" class="prog-modal" aria-labelledby="add-member-title">
+    <div class="admin-card-header">
+        <h3 id="add-member-title" style="margin: 0;">Přidat člena družiny</h3>
+        <button type="button" class="btn btn-small btn-grey" id="add-member-close" aria-label="Zavřít">✕</button>
+    </div>
+
+    <div class="admin-card admin-card-nested" style="margin-bottom: 16px;">
+        <div class="admin-card-header" style="margin-bottom: 8px;">
+            <strong>Rychlé přidání ze SkautISu (oddíl)</strong>
+            <span class="pill pill-ok">Propojeno</span>
+        </div>
+        <div class="row-wrap" style="justify-content: space-between; margin-bottom: 6px;">
+            <span>Matěj Marek (18 let)</span>
+            <button type="button" class="btn btn-mini" data-skautis-add="Matěj Marek">Přidat ze SkautISu</button>
+        </div>
+        <div class="row-wrap" style="justify-content: space-between;">
+            <span>Eliška Veselá (16 let)</span>
+            <button type="button" class="btn btn-mini" data-skautis-add="Eliška Veselá">Přidat ze SkautISu</button>
+        </div>
+    </div>
+
+    <strong class="text-small">Nebo přidat ručně:</strong>
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+        <label class="text-small">Jméno a příjmení:
+            <input id="add-member-name" class="modern-input" type="text" placeholder="Např. Ondřej Nový" style="width: 100%; margin-top: 4px;">
+        </label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <label class="text-small">Strava:
+                <select id="add-member-food" class="modern-select" style="width: 100%; margin-top: 4px;">
+                    <option value="Normální" selected>Normální</option>
+                    <option value="Vegetariánská">Vegetariánská</option>
+                    <option value="Bezlepková">Bezlepková</option>
+                </select>
+            </label>
+            <label class="text-small">Nouzový kontakt:
+                <input id="add-member-ice" class="modern-input" type="text" placeholder="+420 777 …" style="width: 100%; margin-top: 4px;">
+            </label>
+        </div>
+        <button type="button" class="btn btn-block btn-accent" id="add-member-submit"><i class="material-icons">person_add</i> Přidat člena do družiny</button>
+    </div>
+</dialog>
+{% endblock %}

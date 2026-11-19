@@ -1,0 +1,138 @@
+{% extends "pages/_admin-subpage-shell.twig" %}
+{% set sectionTitle = 'Analýza backendu' %}
+{% set pageTitle = 'Analýza backendu vs. mockup – kissj' %}
+
+{% block pageContent %}
+<div class="admin-card">
+    <div class="admin-card-header">
+        <div>
+            <h2>Analýza: Co v kissj už je vs. co je potřeba doprogramovat</h2>
+            <span class="text-muted">Přehled pro tým – rozdělení funkcí z tohoto mockupu podle stavu v aktuálním backendu kissj.</span>
+        </div>
+        <a href="/alt-1-command-tiles.twig" class="btn btn-small btn-grey"><i class="material-icons">arrow_back</i> Přehled</a>
+    </div>
+</div>
+
+{# 1. Už existuje #}
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h3>1. Už existuje v backendu (stačí změnit jen UI / JS)</h3>
+        <span class="pill pill-ok">Připraveno k nasazení UI</span>
+    </div>
+    <div class="table-wrap">
+        <table class="data-table">
+            <thead>
+                <tr><th>Mockup stránka</th><th>Co už v kissj funguje</th><th>Co se mění jen ve frontendu</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="/pages/approve.twig"><b>Schvalování</b></a></td>
+                    <td><code>admin-show-approving</code>, <code>admin-approve</code>, <code>admin-approve-json</code>, <code>admin-deny-participant</code></td>
+                    <td>Přechod z desítek karet pod sebou na tabulku + boční detail (master-detail) a živé filtrování.</td>
+                </tr>
+                <tr>
+                    <td><a href="/pages/payments.twig"><b>Banka &amp; platby</b></a></td>
+                    <td><code>admin-show-auto-payments</code>, <code>admin-update-payments</code>, <code>admin-set-payment-paired</code>, <code>admin-finances</code></td>
+                    <td>Modernější tabulka sjednocená s finančním přehledem na jedné obrazovce.</td>
+                </tr>
+                <tr>
+                    <td><a href="/pages/food.twig"><b>Stravování</b></a></td>
+                    <td><code>admin-food-stats</code>, <code>admin-export-food</code>, <code>admin-export-patrols-food</code> (včetně speciálních diet)</td>
+                    <td>Zobrazení pro samostatnou roli Food Admin bez balastu ostatních sekcí.</td>
+                </tr>
+                <tr>
+                    <td><a href="/pages/participant-detail.twig"><b>Detail účastníka</b></a></td>
+                    <td><code>admin-mend-participant</code>, <code>admin-values-change</code>, <code>admin-entry-participant</code>, <code>admin-set-deal-as-done</code></td>
+                    <td>Rozdělení jedné dlouhé karty s <code>&lt;br/&gt;</code> do přehledných tematických karet.</td>
+                </tr>
+                <tr>
+                    <td><a href="/pages/participants.twig"><b>Živé vyhledávání v tabulkách</b></a></td>
+                    <td>Všechny seznamy už posílají data do šablon</td>
+                    <td>Okamžité filtrování v prohlížeči (u obřích akcí nad 3 000+ lidí později serverové stránkování).</td>
+                </tr>
+                <tr>
+                    <td><a href="/pages/participant-flow.twig"><b>Pohled účastníka &amp; vedoucího</b></a></td>
+                    <td><code>chooseRole</code>, <code>changeDetails</code>, <code>pl-addFromSkautis</code>, <code>confirmCloseRegistration</code></td>
+                    <td>Karty rolí a akcí ve stylu <code>.tile-split</code>, rozdělení formuláře do sekcí, modál přidání člena a GDPR potvrzení, kontrolní checklist před uzamčením.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{# 2. Částečně existuje #}
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h3>2. Částečně existuje (potřebuje rozšířit backend)</h3>
+        <span class="pill pill-warn">Menší úpravy API / DB</span>
+    </div>
+    <div class="table-wrap">
+        <table class="data-table">
+            <thead>
+                <tr><th>Mockup stránka</th><th>Co už existuje</th><th>Co chybí v backendu</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="/pages/programmes.twig"><b>Programy (Google Calendar timeline)</b></a></td>
+                    <td>Kompletní CRUD programů, sekcí i okna přihlašování přes klasické POST formuláře.</td>
+                    <td>JSON endpointy pro drag-to-create, přesuny mezi dny, změnu délky a ukládání z modálu bez reloadu + uložení barvy sekce v DB pro <code>eventApp</code>.</td>
+                </tr>
+                <tr>
+                    <td><a href="/pages/roles.twig"><b>Role, limity &amp; pole</b></a></td>
+                    <td><code>admin-save-role-management</code> už ukládá povolení rolí a jejich limity.</td>
+                    <td>
+                        1) Úprava registračních polí v DB (nyní jsou natvrdo v PHP <code>EventType</code>).<br/>
+                        2) Nové role (<code>FoodAdmin</code>, <code>SafetyAdmin</code>, <code>CheckinAdmin</code>), minimální pohled pro <code>ContingentAdmin</code> a přechod na matici oprávnění.
+                    </td>
+                </tr>
+                <tr>
+                    <td><a href="/pages/entry.twig"><b>Vstup &amp; Check-in (Entry)</b></a></td>
+                    <td>API pro externí <code>entry-kissj</code> + jednotlivé akce <code>entry</code> / <code>setDealAsDone</code>.</td>
+                    <td>
+                        1) Vestavěná obrazovka brány s QR skenerem přímo v kissj.<br/>
+                        2) Konfigurace checklistu brány pro každou akci v DB.<br/>
+                        3) Auditní záznam pro výjimky (<code>Přesto odbavit</code> bez SFH/platby).
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{# 3. Zatím neexistuje #}
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h3>3. Zatím neexistuje (nové moduly v backendu)</h3>
+        <span class="pill pill-err">Nový vývoj</span>
+    </div>
+    <div class="table-wrap">
+        <table class="data-table">
+            <thead>
+                <tr><th>Mockup funkce</th><th>Aktuální stav v kissj</th><th>Co je potřeba vytvořit</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="/pages/participants.twig#guests"><b>Guest table &amp; rychlé odbavení hosta</b></a></td>
+                    <td>Role <code>Guest</code> je jen běžná registrace s e-mailem a schvalováním.</td>
+                    <td>Samostatná jednoduchá tabulka/entita pro hosty (VIP, návštěvy, dny pobytu) s okamžitým zápisem a odbavením na bráně.</td>
+                </tr>
+                <tr>
+                    <td><a href="/pages/safety.twig"><b>Zdraví &amp; SOS/SZT přehled</b></a></td>
+                    <td>Existuje pouze surový CSV export (<code>admin-export-health</code>).</td>
+                    <td>Vyhrazený pohled pro roli <code>SafetyAdmin</code> se seznamem zdravotních omezení, léků, nouzových kontaktů a přítomnosti na místě.</td>
+                </tr>
+                <tr>
+                    <td><a href="/pages/sfh.twig"><b>Integrované SFH (bezpecny-navigamus)</b></a></td>
+                    <td>Zatím běží jako samostatné externí demo.</td>
+                    <td>DB tabulky pro okruhy, otázky a odpovědi izolované podle <code>event_id</code> + sledování splnění u účastníka + účastnický kvíz a QR pro bránu.</td>
+                </tr>
+                <tr>
+                    <td><a href="/alt-1-command-tiles.twig"><b>Živé počty na <code>.tile-split</code> dlaždicích</b></a></td>
+                    <td>Dashboard počítá jen trychtýř registrací, vstup a souhrn stravy.</td>
+                    <td>Lehké SQL dotazy pro hlavní čísla na dlaždicích (5 nespárovaných plateb, 23 speciálních diet, 18 zdravotních záznamů, 130 nesplněných SFH).</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
