@@ -1,0 +1,111 @@
+{% extends "pages/_admin-subpage-shell.twig" %}
+{% from "components/_macros.twig" import splitTile %}
+{% set sectionTitle = 'Vstup & Check-in (Entry)' %}
+{% set pageTitle = 'Vstup & Check-in – kissj Mockup' %}
+
+{% block pageContent %}
+<div class="admin-card">
+    <div class="admin-card-header">
+        <div>
+            <h2>Vstup na akci &amp; QR Check-in</h2>
+            <span class="text-muted">Přijede: <b>842</b> · Na místě: <b>0</b> · Odjelo: <b>0</b></span>
+        </div>
+        <a href="/alt-1-command-tiles.twig" class="btn btn-small btn-grey"><i class="material-icons">arrow_back</i> Přehled</a>
+    </div>
+
+    <div class="tile-grid" style="margin-bottom: 18px;">
+        {{ splitTile('Čeká na příjezd', 'Zaplaceno, zatím neodbaveno', '842', 'osob', '', 'div') }}
+        {{ splitTile('Na místě', 'Odbaveno bránou', '0', 'osob', '', 'div') }}
+        {{ splitTile('Odjelo', 'Ukončený pobyt', '0', 'osob', '', 'div') }}
+    </div>
+
+    <div class="cta-grid">
+        <button type="button" class="btn btn-accent"><i class="material-icons">qr_code_scanner</i> Spustit QR skener</button>
+        <a href="#guest-checkin" class="btn"><i class="material-icons">badge</i> Rychlé odbavení hosta</a>
+    </div>
+
+    <div class="filter-bar">
+        <input type="search" placeholder="Naskenuj QR nebo zadej Tie code, jméno, družinu…" aria-label="Hledat účastníka">
+        <select aria-label="Stav vstupu">
+            <option value="">Všichni</option>
+            <option value="coming" selected>Čeká na příjezd (842)</option>
+            <option value="arrived">Na místě (0)</option>
+            <option value="left">Odjelo (0)</option>
+        </select>
+    </div>
+
+    {# Interactive Check-in Checklist after scanning QR #}
+    {% include "components/_checkin-card.twig" %}
+
+    {# Per-event configuration of the check-in checklist #}
+    <details>
+        <summary style="cursor: pointer; font-weight: 700; padding: 6px 0;">
+            <i class="material-icons" style="font-size: 1.1rem;">settings</i> Konfigurace check-in checklistu pro akci Obrok 27
+        </summary>
+        <div class="checkin-checklist" style="margin-top: 12px;">
+            <label class="checkin-step">
+                <span class="checkin-step-main"><input type="checkbox" checked><span>Vyžadovat SFH kvíz před vstupem</span></span>
+                <span class="pill pill-info">Aktivní</span>
+            </label>
+            <label class="checkin-step">
+                <span class="checkin-step-main"><input type="checkbox" checked><span>Výdej šátku / merch (napojeno na Deals)</span></span>
+                <span class="pill pill-info">Aktivní</span>
+            </label>
+            <label class="checkin-step">
+                <span class="checkin-step-main"><input type="checkbox" checked><span>Výdej jmenovky / badge</span></span>
+                <span class="pill pill-info">Aktivní</span>
+            </label>
+            <label class="checkin-step">
+                <span class="checkin-step-main"><input type="checkbox"><span>Kontrola odevzdání zdravotního prohlášení (pod 18 let)</span></span>
+                <span class="pill pill-neutral">Vypnuto</span>
+            </label>
+        </div>
+    </details>
+</div>
+
+{# Rychlé odbavení hosta (Guest table check-in) #}
+<div class="admin-card" id="guest-checkin">
+    <div class="admin-card-header">
+        <div>
+            <h2>Rychlé odbavení hosta (Guest table)</h2>
+            <span class="text-muted">Odbavení očekávaného hosta ze seznamu nebo rychlé zapsání neohlášeného hosta na bráně.</span>
+        </div>
+        <a href="/pages/participants.twig#guests" class="btn btn-small btn-grey">Celý seznam hostů</a>
+    </div>
+
+    <div class="table-wrap" style="margin-bottom: 18px;">
+        <table class="data-table">
+            <thead>
+                <tr><th>Host</th><th>Organizace / Poznámka</th><th>Dny</th><th>Stav</th><th>Akce</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Mgr. Pavel Král</b></td>
+                    <td>Ústředí Junáka</td>
+                    <td>Pá – So</td>
+                    <td><span class="pill pill-neutral">Očekáván</span></td>
+                    <td><button type="button" class="btn btn-small btn-accent">Odbavit hosta</button></td>
+                </tr>
+                <tr>
+                    <td><b>Eva Novotná</b></td>
+                    <td>Starostka města</td>
+                    <td>So</td>
+                    <td><span class="pill pill-ok">Na místě</span></td>
+                    <td><button type="button" class="btn btn-small btn-grey">Odjezd</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Přidat a rovnou odbavit nového hosta</h3>
+    <form class="filter-bar" style="margin-bottom: 12px;">
+        <input class="modern-input" type="text" placeholder="Jméno a příjmení hosta" style="flex: 1 1 200px;">
+        <input class="modern-input" type="text" placeholder="Organizace / důvod návštěvy" style="flex: 1 1 220px;">
+        <select class="modern-select" aria-label="Dny návštěvy">
+            <option value="today">Pouze dnes</option>
+            <option value="weekend">Celý víkend</option>
+        </select>
+    </form>
+    <button type="button" class="btn btn-block"><i class="material-icons">person_add</i> Přidat a odbavit hosta</button>
+</div>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "pages/_admin-subpage-shell.twig" %}
+{% set sectionTitle = 'Banka & platby' %}
+{% set pageTitle = 'Banka & platby – kissj Mockup' %}
+
+{% block pageContent %}
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h2>Banka &amp; párování plateb</h2>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button type="button" class="btn btn-small"><i class="material-icons">sync</i> Načíst nové platby z banky</button>
+            <a href="/alt-1-command-tiles.twig" class="btn btn-small btn-grey"><i class="material-icons">arrow_back</i> Přehled</a>
+        </div>
+    </div>
+
+    <h3>Nespárované platby k řešení (5)</h3>
+    <div class="table-wrap">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Účet</th>
+                <th>Částka</th>
+                <th>VS</th>
+                <th>Zpráva pro příjemce</th>
+                <th>Akce</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>18. 11.</td>
+                <td>2400123456/2010</td>
+                <td><b>2 400 CZK</b></td>
+                <td><span class="pill pill-err">chybí</span></td>
+                <td>Obrok – Družina Bobři, Tomáš Dvořák</td>
+                <td>
+                    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px;">
+                        <input class="modern-input" type="text" placeholder="VS…" aria-label="Variabilní symbol" style="width: 110px; height: 34px; padding: 4px 10px;">
+                        <button type="button" class="btn btn-mini">Spárovat</button>
+                        <button type="button" class="btn btn-mini btn-grey">Nesouvisející</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>17. 11.</td>
+                <td>1987654321/0800</td>
+                <td><b>1 200 CZK</b></td>
+                <td>884120</td>
+                <td>IST Marek Horák</td>
+                <td>
+                    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px;">
+                        <input class="modern-input" type="text" value="884120" aria-label="Variabilní symbol" style="width: 110px; height: 34px; padding: 4px 10px;">
+                        <button type="button" class="btn btn-mini">Spárovat</button>
+                        <button type="button" class="btn btn-mini btn-grey">Nesouvisející</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<div class="admin-card" id="finances">
+    <div class="admin-card-header">
+        <h3>Finanční přehled</h3>
+        <span class="pill pill-ok">842 zaplaceno · 23 čeká</span>
+    </div>
+    <div class="table-wrap">
+    <table class="data-table">
+        <thead>
+            <tr><th>Měsíc</th><th>CZK</th><th>EUR</th><th>Šátky</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Říjen</td><td>412 000 CZK</td><td>1 450 EUR</td><td>340</td></tr>
+            <tr><td>Listopad</td><td>618 400 CZK</td><td>2 100 EUR</td><td>502</td></tr>
+            <tr><td><b>Celkem</b></td><td><b>1 030 400 CZK</b></td><td><b>3 550 EUR</b></td><td><b>842</b></td></tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}

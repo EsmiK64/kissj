@@ -1,0 +1,144 @@
+{% extends "pages/_admin-subpage-shell.twig" %}
+{% set sectionTitle = 'Limity, role & pole' %}
+{% set pageTitle = 'Limity, role & pole – kissj Mockup' %}
+
+{% block pageContent %}
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h2>Správa rolí, kapacit a registračních polí</h2>
+        <a href="/alt-1-command-tiles.twig" class="btn btn-small btn-grey"><i class="material-icons">arrow_back</i> Přehled</a>
+    </div>
+
+    <form class="filter-bar" style="margin-bottom: 18px;">
+        <label style="font-weight: 700;">Celkový limit uzavřených účastníků:
+            <input class="modern-input" type="number" value="1200" min="0" max="100000" style="width: 130px; margin-left: 8px;">
+        </label>
+        <button type="button" class="btn btn-small" data-action="toast"><i class="material-icons">save</i> Uložit celkový limit</button>
+    </form>
+
+    <div class="table-wrap" style="margin-bottom: 20px;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>Povoleno</th>
+                    <th>Aktuálně</th>
+                    <th>Limit role</th>
+                    <th>Velikost skupiny (min / max)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Vedoucí družiny (PL)</b></td>
+                    <td><input type="checkbox" checked aria-label="Povolit PL"></td>
+                    <td>101</td>
+                    <td><input class="modern-input" type="number" value="120" style="width: 100px;"></td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td><b>Účastník družiny (PP)</b></td>
+                    <td><input type="checkbox" checked aria-label="Povolit PP"></td>
+                    <td>601</td>
+                    <td><input class="modern-input" type="number" placeholder="Bez limitu" style="width: 120px;"></td>
+                    <td>
+                        <input class="modern-input" type="number" value="4" style="width: 72px;" aria-label="Min PP">
+                        –
+                        <input class="modern-input" type="number" value="8" style="width: 72px;" aria-label="Max PP">
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>IST</b></td>
+                    <td><input type="checkbox" checked aria-label="Povolit IST"></td>
+                    <td>181</td>
+                    <td><input class="modern-input" type="number" value="250" style="width: 100px;"></td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td><b>Technický tým (TTL / TTP)</b></td>
+                    <td><input type="checkbox" checked aria-label="Povolit TTL"></td>
+                    <td>17 týmů</td>
+                    <td><input class="modern-input" type="number" placeholder="Bez limitu" style="width: 120px;"></td>
+                    <td>
+                        <input class="modern-input" type="number" value="2" style="width: 72px;" aria-label="Min TTP">
+                        –
+                        <input class="modern-input" type="number" value="12" style="width: 72px;" aria-label="Max TTP">
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Hosté (Guest)</b></td>
+                    <td><input type="checkbox" checked aria-label="Povolit Guest"></td>
+                    <td>14</td>
+                    <td><input class="modern-input" type="number" value="30" style="width: 100px;"></td>
+                    <td>—</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Registrační pole podle role</h3>
+    <div class="filter-bar">
+        <select class="modern-select" aria-label="Vybrat roli pro úpravu polí">
+            <option value="pl" selected>Vedoucí družiny (PL)</option>
+            <option value="pp">Účastník družiny (PP)</option>
+            <option value="ist">IST</option>
+            <option value="ttl">Technický tým (TTL)</option>
+        </select>
+    </div>
+
+    <div class="table-wrap" style="margin-bottom: 18px;">
+        <table class="data-table">
+            <thead>
+                <tr><th>Pole formuláře</th><th>Stav pole</th><th>Lze upravit po uzamčení?</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Celé jméno &amp; datum narození</b></td>
+                    <td>
+                        <select class="modern-select">
+                            <option value="required" selected>Povinné</option>
+                            <option value="optional">Volitelné</option>
+                            <option value="hidden">Skryté</option>
+                        </select>
+                    </td>
+                    <td><input type="checkbox" aria-label="Upravit po uzamčení"></td>
+                </tr>
+                <tr>
+                    <td><b>Stravování &amp; diety</b></td>
+                    <td>
+                        <select class="modern-select">
+                            <option value="required" selected>Povinné</option>
+                            <option value="optional">Volitelné</option>
+                            <option value="hidden">Skryté</option>
+                        </select>
+                    </td>
+                    <td><input type="checkbox" checked aria-label="Upravit po uzamčení"></td>
+                </tr>
+                <tr>
+                    <td><b>Zdravotní omezení &amp; léky</b></td>
+                    <td>
+                        <select class="modern-select">
+                            <option value="required">Povinné</option>
+                            <option value="optional" selected>Volitelné</option>
+                            <option value="hidden">Skryté</option>
+                        </select>
+                    </td>
+                    <td><input type="checkbox" checked aria-label="Upravit po uzamčení"></td>
+                </tr>
+                <tr>
+                    <td><b>Nouzový kontakt</b></td>
+                    <td>
+                        <select class="modern-select">
+                            <option value="required" selected>Povinné</option>
+                            <option value="optional">Volitelné</option>
+                            <option value="hidden">Skryté</option>
+                        </select>
+                    </td>
+                    <td><input type="checkbox" checked aria-label="Upravit po uzamčení"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="button" class="btn btn-block btn-accent" data-action="toast"><i class="material-icons">save</i> Uložit nastavení rolí a polí</button>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "pages/_admin-subpage-shell.twig" %}
+{% set sectionTitle = 'Schvalování' %}
+{% set pageTitle = 'Schvalování – kissj Mockup' %}
+
+{% block pageContent %}
+<div class="admin-card">
+    <div class="admin-card-header">
+        <div>
+            <h2>Schvalování registrací (12 čeká)</h2>
+            <span class="text-muted">Seznam čekajících vlevo, detail a akce vpravo.</span>
+        </div>
+        <a href="/alt-1-command-tiles.twig" class="btn btn-small btn-grey"><i class="material-icons">arrow_back</i> Přehled</a>
+    </div>
+
+    <div class="filter-bar">
+        <input type="search" placeholder="Hledat jméno, družinu, e-mail…" aria-label="Hledat">
+        <select aria-label="Role">
+            <option value="">Všechny role (12)</option>
+            <option value="pl">Vedoucí družiny (8)</option>
+            <option value="ist">IST (4)</option>
+        </select>
+    </div>
+
+    <div class="master-detail">
+        <div class="table-wrap">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Účastník / Družina</th>
+                    <th>Role</th>
+                    <th>Počet</th>
+                    <th>SkautIS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="is-selected">
+                    <td><b>Družina Lišky</b><br/><span class="text-small text-muted">Jan Novák</span></td>
+                    <td><span class="pill pill-info">PL</span></td>
+                    <td>6</td>
+                    <td><span class="pill pill-ok">OK</span></td>
+                </tr>
+                <tr>
+                    <td><b>Družina Jestřábi</b><br/><span class="text-small text-muted">Petr Svoboda</span></td>
+                    <td><span class="pill pill-info">PL</span></td>
+                    <td>5</td>
+                    <td><span class="pill pill-err">Chybí</span></td>
+                </tr>
+                <tr>
+                    <td><b>Marie Černá</b><br/><span class="text-small text-muted">marie@skaut.cz</span></td>
+                    <td><span class="pill pill-neutral">IST</span></td>
+                    <td>1</td>
+                    <td><span class="pill pill-ok">OK</span></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <aside class="admin-card inspector-panel" style="margin-bottom: 0; border: 1px solid var(--border-subtle);">
+            <h3>Družina Lišky – Jan Novák</h3>
+            <div class="kv-grid">
+                <span class="kv-label">E-mail</span><span>jan@skaut.cz</span>
+                <span class="kv-label">SkautIS</span><span><span class="pill pill-ok">Propojeno</span></span>
+                <span class="kv-label">Strava</span><span>5× normální, 1× bezlepková</span>
+            </div>
+            <div class="inspector-actions">
+                <button type="button" class="btn btn-block btn-accent">
+                    <i class="material-icons">check_circle</i> Schválit a odeslat e-mail
+                </button>
+                <button type="button" class="btn btn-block btn-grey">
+                    <i class="material-icons">cancel</i> Zamítnout
+                </button>
+            </div>
+        </aside>
+    </div>
+</div>
+{% endblock %}

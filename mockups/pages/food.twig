@@ -1,0 +1,71 @@
+{% extends "pages/_admin-subpage-shell.twig" %}
+{% from "components/_macros.twig" import splitTile %}
+{% set sectionTitle = 'Stravování' %}
+{% set pageTitle = 'Stravování – kissj Mockup' %}
+
+{% block pageContent %}
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h2>Stravování &amp; diety</h2>
+        <div class="row-wrap">
+            <a href="#export-food" class="btn btn-small"><i class="material-icons">download</i> Export CSV</a>
+            <a href="#export-patrols-food" class="btn btn-small btn-grey"><i class="material-icons">groups</i> Po družinách</a>
+            <a href="/alt-1-command-tiles.twig" class="btn btn-small btn-grey"><i class="material-icons">arrow_back</i> Přehled</a>
+        </div>
+    </div>
+    <div class="tile-grid">
+        {{ splitTile('Speciální diety', 'Bezlepková, alergie, jiné', '44', 'osob', '#special-diets') }}
+        {{ splitTile('Vegetariáni', 'Bezmasá strava', '88', 'osob', '#special-diets') }}
+        {{ splitTile('Celkem strávníků', 'Všichni přihlášení', '842', 'osob', '#special-diets') }}
+    </div>
+</div>
+
+<div class="admin-card">
+    <h3>Přítomní na místě podle role a diety</h3>
+    <div class="table-wrap">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Normální</th>
+                <th>Vegetariánská</th>
+                <th>Bezlepková</th>
+                <th>Jiné</th>
+                <th>Celkem</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Účastníci (PP)</td><td>510</td><td>62</td><td>15</td><td>14</td><td><b>601</b></td></tr>
+            <tr><td>IST</td><td>152</td><td>22</td><td>5</td><td>8</td><td><b>187</b></td></tr>
+            <tr><td>OT &amp; Hosté</td><td>48</td><td>4</td><td>1</td><td>1</td><td><b>54</b></td></tr>
+            <tr><td><b>Celkem</b></td><td><b>710</b></td><td><b>88</b></td><td><b>21</b></td><td><b>23</b></td><td><b>842</b></td></tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<div class="admin-card">
+    <h3>Speciální diety, alergie a poznámky (23)</h3>
+    <div class="table-wrap">
+    <table class="data-table">
+        <thead>
+            <tr><th>Jméno</th><th>Role</th><th>Dieta</th><th>Poznámka</th><th>Zdravotní poznámka</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Klára Dvořáková</td><td>PP</td>
+                <td><span class="pill pill-warn">Bezlepková</span></td>
+                <td>Vlastní bezlepkové pečivo</td>
+                <td>Silná celiakie</td>
+            </tr>
+            <tr>
+                <td>Tomáš Svoboda</td><td>IST</td>
+                <td><span class="pill pill-err">Jiné</span></td>
+                <td>Bez laktózy a ořechů</td>
+                <td>Alergie na ořechy (EpiPen)</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends "pages/_admin-subpage-shell.twig" %}
+{% set sectionTitle = 'SFH – Bezpečnostní příprava' %}
+{% set pageTitle = 'SFH – kissj Mockup' %}
+
+{% block pageContent %}
+<div class="alert alert-info" style="text-align: left;">
+    <strong>Integrace <code>bezpecny-navigamus</code> (SFH) pro všechny akce:</strong><br/>
+    Multi-event bezpečnostní příprava a kvíz spravovaný přímo z kissj – s vlastním grafickým kabátkem akce a sadou otázek specifických pro danou akci (vodácké otázky neprosáknou do Obroku).
+</div>
+
+<div class="admin-card">
+    <div class="admin-card-header">
+        <div>
+            <h2>SFH – Bezpečnostní příprava (Obrok 27)</h2>
+            <span class="pill pill-ok">Splněno: 712 / 842 účastníků (85 %)</span>
+        </div>
+        <a href="/alt-1-command-tiles.twig" class="btn btn-small btn-grey"><i class="material-icons">arrow_back</i> Přehled</a>
+    </div>
+
+    <div class="cta-grid">
+        <a href="#edit-questions" class="btn btn-accent"><i class="material-icons">quiz</i> Upravit otázky pro Obrok 27</a>
+        <a href="https://skautdevs.github.io/bezpecny-navigamus/" target="_blank" class="btn"><i class="material-icons">visibility</i> Náhled pro účastníky</a>
+    </div>
+
+    <h3>Moduly a okruhy otázek</h3>
+    <div class="table-wrap">
+        <table class="data-table">
+            <thead>
+                <tr><th>Okruh</th><th>Počet otázek</th><th>Cílové role</th><th>Úspěšnost</th><th>Akce</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Krizové situace, SOS &amp; první pomoc</b></td>
+                    <td>8</td>
+                    <td>Všichni</td>
+                    <td>92 %</td>
+                    <td><button type="button" class="btn btn-mini btn-grey">Upravit</button></td>
+                </tr>
+                <tr>
+                    <td><b>Požární bezpečnost &amp; tábořiště</b></td>
+                    <td>6</td>
+                    <td>PL, PP, IST</td>
+                    <td>88 %</td>
+                    <td><button type="button" class="btn btn-mini btn-grey">Upravit</button></td>
+                </tr>
+                <tr>
+                    <td><b>Pravidla nočního klidu a areálu Obrok 27</b></td>
+                    <td>5</td>
+                    <td>Všichni</td>
+                    <td>79 %</td>
+                    <td><button type="button" class="btn btn-mini btn-grey">Upravit</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h3>Nesplněná příprava před příjezdem (130)</h3>
+        <a href="/pages/entry.twig" class="btn btn-small btn-grey">Kontrola u vstupu (Entry)</a>
+    </div>
+    <div class="table-wrap">
+        <table class="data-table">
+            <thead>
+                <tr><th>Účastník / Družina</th><th>Role</th><th>Stav SFH</th><th>Poslední připomínka</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Družina Jestřábi</b> (Petr Svoboda)</td>
+                    <td>PL (5×)</td>
+                    <td><span class="pill pill-err">2 / 5 splněno</span></td>
+                    <td>15. 11. 2026</td>
+                </tr>
+                <tr>
+                    <td><b>Marie Černá</b></td>
+                    <td>IST</td>
+                    <td><span class="pill pill-warn">Rozpracováno (60 %)</span></td>
+                    <td>—</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{# Editor otázek pro Obrok 27 #}
+<div class="admin-card" id="edit-questions">
+    <div class="admin-card-header">
+        <div>
+            <h3>Editor otázek pro Obrok 27</h3>
+            <span class="text-small text-muted">Otázky jsou izolované pro tuto akci (vodácké otázky z Navigamusu se sem nepropisují).</span>
+        </div>
+        <button type="button" class="btn btn-small"><i class="material-icons">add</i> Přidat otázku</button>
+    </div>
+
+    <div class="filter-bar">
+        <select class="modern-select" aria-label="Okruh otázek">
+            <option value="sos" selected>Krizové situace, SOS &amp; první pomoc (8)</option>
+            <option value="fire">Požární bezpečnost &amp; tábořiště (6)</option>
+            <option value="rules">Pravidla nočního klidu a areálu Obrok 27 (5)</option>
+        </select>
+        <select class="modern-select" aria-label="Cílová role">
+            <option value="all" selected>Cílová role: Všichni</option>
+            <option value="pl">Pouze PL / PP</option>
+            <option value="ist">Pouze IST</option>
+        </select>
+    </div>
+
+    <div class="admin-card" style="border: 1.5px solid var(--border-subtle); margin-bottom: 14px;">
+        <div class="admin-card-header" style="margin-bottom: 10px;">
+            <strong>Otázka #1</strong>
+            <label style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem;">
+                <input type="checkbox" checked> Aktivní v kvízu
+            </label>
+        </div>
+        <input class="modern-input" type="text" value="Co uděláš jako první, když na tábořišti najdeš osobu v bezvědomí?" style="width: 100%; margin-bottom: 10px;">
+        <div class="quiz-options">
+            <label class="quiz-option">
+                <input type="radio" name="q1-correct" checked>
+                <input class="modern-input" type="text" value="Zajistím vlastní bezpečnost, zkontroluji vědomí a dýchání, volám 155 / SOS linku." style="flex: 1;">
+            </label>
+            <label class="quiz-option">
+                <input type="radio" name="q1-correct">
+                <input class="modern-input" type="text" value="Okamžitě začnu s masáží srdce bez kontroly dýchání." style="flex: 1;">
+            </label>
+            <label class="quiz-option">
+                <input type="radio" name="q1-correct">
+                <input class="modern-input" type="text" value="Odnesu osobu do stanu a počkám, až se probere." style="flex: 1;">
+            </label>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-block btn-accent" data-action="toast"><i class="material-icons">save</i> Uložit otázky pro Obrok 27</button>
+</div>
+{% endblock %}

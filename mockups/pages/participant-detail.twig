@@ -1,0 +1,111 @@
+{% extends "pages/_admin-subpage-shell.twig" %}
+{% set sectionTitle = 'Detail účastníka' %}
+{% set pageTitle = 'Detail účastníka – kissj Mockup' %}
+
+{% block pageContent %}
+<div class="admin-card">
+    <div class="admin-card-header">
+        <div>
+            <span class="pill pill-ok">Zaplaceno</span>
+            <span class="pill pill-info">Vedoucí družiny (PL · 6× PP)</span>
+            <h2 style="margin-top: 6px;">Jan Novák – Družina Lišky</h2>
+            <span class="text-small text-muted">Tie code: <code>AB12CD</code> · jan@skaut.cz · SkautIS propojeno</span>
+        </div>
+        <a href="/pages/participants.twig" class="btn btn-small btn-grey"><i class="material-icons">arrow_back</i> Zpět na seznam</a>
+    </div>
+</div>
+
+{# Karta 1: Subcamp & Interní hodnoty #}
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h3>Subcamp &amp; interní identifikátory</h3>
+    </div>
+    <form class="filter-bar" style="margin-bottom: 0;">
+        <label>Subcamp:
+            <select class="modern-select">
+                <option value="sever" selected>Subcamp Sever</option>
+                <option value="jih">Subcamp Jih</option>
+                <option value="ist">IST Kemp</option>
+            </select>
+        </label>
+        <label>Interní unikátní ID: <input class="modern-input" type="text" value="OB27-0142"></label>
+        <label>Interní společné ID: <input class="modern-input" type="text" value="PATROL-14"></label>
+        <button type="button" class="btn btn-small"><i class="material-icons">save</i> Uložit</button>
+    </form>
+</div>
+
+{# Karta 2: Osobní údaje & Členové družiny #}
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h3>Osobní údaje &amp; skupina</h3>
+        <a href="#edit-details" class="btn btn-small"><i class="material-icons">edit</i> Upravit údaje</a>
+    </div>
+    <div class="kv-grid" style="margin-bottom: 18px;">
+        <span class="kv-label">Celé jméno</span><span><b>Jan Novák</b></span>
+        <span class="kv-label">Datum narození</span><span>12. 4. 2006 (20 let)</span>
+        <span class="kv-label">Stravování</span><span>Normální</span>
+        <span class="kv-label">Zdravotní údaje</span><span>Bez omezení</span>
+        <span class="kv-label">Poznámka</span><span>Přijedeme vlakem v pátek dopoledne.</span>
+    </div>
+
+    <h4>Členové družiny (5)</h4>
+    <div class="table-wrap">
+        <table class="data-table">
+            <thead>
+                <tr><th>Jméno</th><th>Věk</th><th>Strava</th><th>Zdraví / Poznámka</th><th>Akce</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Klára Dvořáková</td><td>17</td><td><span class="pill pill-warn">Bezlepková</span></td><td>Silná celiakie</td><td><a href="#mend-pp" class="btn btn-mini">Detail</a></td></tr>
+                <tr><td>Jakub Horák</td><td>16</td><td>Normální</td><td>—</td><td><a href="#mend-pp" class="btn btn-mini">Detail</a></td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{# Karta 3: Platby #}
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h3>Platby</h3>
+        <button type="button" class="btn btn-small"><i class="material-icons">add</i> Přidat platbu</button>
+    </div>
+    <div class="table-wrap">
+        <table class="data-table">
+            <thead>
+                <tr><th>VS</th><th>Částka</th><th>Stav</th><th>Datum úhrady</th><th>Poznámka</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>884102</code></td><td><b>7 200 CZK</b></td><td><span class="pill pill-ok">Zaplaceno</span></td><td>10. 11. 2026</td><td>Fio banka auto-párování</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{# Karta 4: Vstup (Entry), SFH & Deals #}
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h3>Vstup na akci, SFH &amp; Deals</h3>
+        <a href="/pages/entry.twig" class="btn btn-small btn-grey">Otevřít v Entry</a>
+    </div>
+    <div class="kv-grid" style="margin-bottom: 14px;">
+        <span class="kv-label">Vstup</span><span><span class="pill pill-neutral">Zatím nepřijel</span></span>
+        <span class="kv-label">Odjezd</span><span><span class="pill pill-neutral">—</span></span>
+        <span class="kv-label">SFH kvíz</span><span><span class="pill pill-ok">Splněno (6 / 6)</span></span>
+        <span class="kv-label">Deals</span><span>Šátek <span class="pill pill-warn">Nevydáno</span></span>
+    </div>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <button type="button" class="btn btn-small"><i class="material-icons">how_to_reg</i> Označit vstup</button>
+        <button type="button" class="btn btn-small btn-grey"><i class="material-icons">check</i> Označit deal jako vydaný</button>
+    </div>
+</div>
+
+{# Karta 5: Kritické akce administrátora #}
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h3>Akce administrátora</h3>
+    </div>
+    <div class="cta-grid" style="margin-bottom: 0;">
+        <button type="button" class="btn btn-grey"><i class="material-icons">undo</i> Vrátit ke schválení</button>
+        <button type="button" class="btn btn-danger"><i class="material-icons">cancel</i> Zrušit registraci</button>
+    </div>
+</div>
+{% endblock %}

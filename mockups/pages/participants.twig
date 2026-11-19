@@ -1,0 +1,90 @@
+{% extends "pages/_admin-subpage-shell.twig" %}
+{% set sectionTitle = 'Účastníci & Guest table' %}
+{% set pageTitle = 'Účastníci – kissj Mockup' %}
+
+{% block pageContent %}
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h2>Účastníci (842 zaplacených · 36 otevřených)</h2>
+        <a href="/alt-1-command-tiles.twig" class="btn btn-small btn-grey"><i class="material-icons">arrow_back</i> Přehled</a>
+    </div>
+
+    <div class="filter-bar">
+        <input type="search" placeholder="Hledat jméno, e-mail, družinu, subcamp, tie code…" aria-label="Hledat">
+        <select aria-label="Stav">
+            <option value="">Všechny stavy</option>
+            <option value="paid">Zaplaceno</option>
+            <option value="approved">Schváleno</option>
+            <option value="closed">Uzamčeno</option>
+            <option value="open">Otevřeno</option>
+        </select>
+        <select aria-label="Role">
+            <option value="">Všechny role</option>
+            <option value="pl">Družina (PL/PP)</option>
+            <option value="ist">IST</option>
+            <option value="ttl">Technický tým</option>
+            <option value="guest">Host (Guest)</option>
+        </select>
+    </div>
+
+    <div class="table-wrap">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Jméno / Skupina</th>
+                <th>Role</th>
+                <th>Stav</th>
+                <th>Subcamp</th>
+                <th>Vstup</th>
+                <th>Akce</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>Jan Novák</b><br/><span class="text-small text-muted">Družina Lišky · jan@skaut.cz</span></td>
+                <td>PL (6×)</td>
+                <td><span class="pill pill-ok">Zaplaceno</span></td>
+                <td>Subcamp Sever</td>
+                <td><span class="pill pill-neutral">Přijede</span></td>
+                <td><a href="/pages/participant-detail.twig" class="btn btn-mini">Upravit</a></td>
+            </tr>
+            <tr>
+                <td><b>Tomáš Svoboda</b><br/><span class="text-small text-muted">tomas@skaut.cz</span></td>
+                <td>IST</td>
+                <td><span class="pill pill-ok">Zaplaceno</span></td>
+                <td>IST Kemp</td>
+                <td><span class="pill pill-ok">Na místě</span></td>
+                <td><a href="/pages/participant-detail.twig" class="btn btn-mini">Upravit</a></td>
+            </tr>
+            <tr>
+                <td><b>Petra Malá</b><br/><span class="text-small text-muted">Technický tým Zvuk</span></td>
+                <td>TTL (4×)</td>
+                <td><span class="pill pill-warn">Otevřeno</span></td>
+                <td>—</td>
+                <td><span class="pill pill-neutral">—</span></td>
+                <td><a href="/pages/participant-detail.twig" class="btn btn-mini">Upravit</a></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<div class="admin-card" id="guests">
+    <div class="admin-card-header">
+        <h3>Guest table (Hosté akce)</h3>
+        <span class="pill pill-warn">Rozpracováno v kissj (cross-event)</span>
+    </div>
+    <p class="text-muted">Dedikovaný přehled pro hosty (VIP, delegace, rodiče, krátkodobé návštěvy) se snadným přidáním a rychlým check-inem bez nutnosti procházet klasickou registrací.</p>
+    <div class="table-wrap">
+    <table class="data-table">
+        <thead>
+            <tr><th>Host</th><th>Organizace / Poznámka</th><th>Dny</th><th>Strava</th><th>Check-in</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Mgr. Pavel Král</td><td>Ústředí Junáka</td><td>Pá – So</td><td>Normální</td><td><span class="pill pill-neutral">Očekáván</span></td></tr>
+            <tr><td>Eva Novotná</td><td>Starostka města</td><td>So</td><td>Bezlepková</td><td><span class="pill pill-ok">Na místě</span></td></tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}

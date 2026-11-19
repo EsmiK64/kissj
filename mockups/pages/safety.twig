@@ -1,0 +1,56 @@
+{% extends "pages/_admin-subpage-shell.twig" %}
+{% set sectionTitle = 'Zdraví & SOS/SZT (Návrh)' %}
+{% set pageTitle = 'Zdraví & SOS/SZT – kissj Mockup' %}
+
+{% block pageContent %}
+<div class="alert alert-warning" style="text-align: left;">
+    <strong>Tato stránka zatím v kissj neexistuje (ale měla by, případně jako napojená Security App).</strong><br/>
+    Aktuálně existuje pouze jednorázový CSV export <code>admin-export-health</code>, kvůli kterému si týmy SOS a SZT předávají Excelové tabulky na flashkách nebo e-mailem.
+</div>
+
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h2>SOS &amp; SZT – Zdravotní a bezpečnostní přehled</h2>
+        <a href="/alt-1-command-tiles.twig" class="btn btn-small btn-grey"><i class="material-icons">arrow_back</i> Přehled</a>
+    </div>
+    <div class="cta-grid">
+        <a href="#export-health" class="btn btn-accent"><i class="material-icons">medical_information</i> Export zdravotních dat</a>
+        <a href="/pages/sfh.twig" class="btn"><i class="material-icons">verified_user</i> SFH (Bezpečnostní kvíz)</a>
+        <a href="/pages/entry.twig" class="btn btn-grey"><i class="material-icons">how_to_reg</i> Přítomnost (Entry)</a>
+    </div>
+</div>
+
+<div class="admin-card">
+    <div class="filter-bar">
+        <input type="search" placeholder="Hledat jméno, alergii, léky, nouzový kontakt…" aria-label="Hledat">
+        <select aria-label="Stav na akci">
+            <option value="">Všichni na místě i očekávaní</option>
+            <option value="arrived">Pouze na místě</option>
+        </select>
+    </div>
+
+    <div class="table-wrap">
+    <table class="data-table">
+        <thead>
+            <tr><th>Účastník</th><th>Stav na akci</th><th>Zdravotní omezení / Léky</th><th>Nouzový kontakt</th><th>SFH kvíz</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>Lukáš Král</b> (PP)</td>
+                <td><span class="pill pill-ok">Na místě</span></td>
+                <td>Astma (inhalátor u sebe)</td>
+                <td>+420 777 123 456 (matka)</td>
+                <td><span class="pill pill-ok">Splněno</span></td>
+            </tr>
+            <tr>
+                <td><b>Anna Malá</b> (PP)</td>
+                <td><span class="pill pill-neutral">Přijede</span></td>
+                <td>Diabetes 1. typu (inzulínová pumpa)</td>
+                <td>+420 602 987 654 (otec)</td>
+                <td><span class="pill pill-warn">Čeká</span></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}

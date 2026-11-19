@@ -1,0 +1,35 @@
+{% extends "pages/_admin-subpage-shell.twig" %}
+{% set sectionTitle = 'Ekosystém & Plánované moduly' %}
+{% set pageTitle = 'Plánované moduly – kissj Mockup' %}
+
+{% block pageContent %}
+<div class="alert alert-info" style="text-align: left;">
+    <strong>Tato stránka / sekce zatím v kissj neexistuje.</strong><br/>
+    Slouží jako návrh rozcestníku pro externí aplikace a plánované funkce, které se napojují na data z kissj.
+</div>
+
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h2>Napojené &amp; plánované aplikace</h2>
+        <a href="/alt-1-command-tiles.twig" class="btn btn-small btn-grey"><i class="material-icons">arrow_back</i> Přehled</a>
+    </div>
+
+    <div class="ecosystem-grid">
+        <div class="ecosystem-card">
+            <h3>SFH (Bezpečnostní příprava)</h3>
+            <span class="pill pill-info">Multi-event demo (Navigamus / Obrok)</span>
+            <p class="text-small text-muted">Mělo by mít přímé propojení na účastníky v kissj (stav splnění, grafický kabátek akce, event-specific otázky).</p>
+        </div>
+        <div class="ecosystem-card">
+            <h3>IST App (Servisní tým)</h3>
+            <span class="pill pill-warn">Plánováno mimo jádro kissj</span>
+            <p class="text-small text-muted">Aplikace primárně pro šéfy IST na akci (směny, úkoly). kissj zůstává zdrojem seznamu schválených IST.</p>
+        </div>
+        <div class="ecosystem-card">
+            <h3>Exporty &amp; API klíče</h3>
+            <span class="pill pill-ok">Existuje v kissj</span>
+            <p class="text-small text-muted">Jedno místo pro exporty (CSV zaplacených, kompletní data, zdravotní data, soupisky) a přehled API přístupů pro eventApp.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
