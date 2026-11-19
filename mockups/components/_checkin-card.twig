@@ -1,0 +1,80 @@
+{% from "components/_macros.twig" import qrPlaceholder %}
+<div class="admin-card admin-card-nested">
+    <div class="admin-card-header">
+        <div>
+            <span class="pill pill-info">Naskenovaný QR · PL · Družina Jestřábi (5×)</span>
+            <h3 style="margin-top: 6px;">Petr Svoboda (<code>XY98ZT</code>)</h3>
+        </div>
+        <span class="pill pill-ok">Zaplaceno</span>
+    </div>
+
+    <div class="checkin-checklist">
+        <label class="checkin-step">
+            <span class="checkin-step-main">
+                <input type="checkbox" checked>
+                <span>1. Kontrola platby &amp; schválení</span>
+            </span>
+            <span class="pill pill-ok">OK</span>
+        </label>
+
+        <div class="checkin-step" style="border-color: var(--color-accent); flex-direction: column; align-items: stretch;">
+            <div class="row-wrap" style="justify-content: space-between;">
+                <label class="checkin-step-main" style="cursor: pointer;">
+                    <input type="checkbox" data-checkin-sfh>
+                    <span>2. SFH (Bezpečnostní kvíz)</span>
+                </label>
+                <div class="row-wrap">
+                    <span class="pill pill-err">Nesplněno (2 / 5)</span>
+                    <a href="https://skautdevs.github.io/bezpecny-navigamus/" target="_blank" class="btn btn-small btn-grey">Otevřít SFH</a>
+                </div>
+            </div>
+            <details open style="margin-top: 8px; padding-top: 10px; border-top: 1px dashed var(--border-subtle);">
+                <summary style="cursor: pointer; font-weight: 700; font-size: 0.92rem;">
+                    QR kód pro účastníka (naskenovat mobilem a vyplnit aktuální SFH)
+                </summary>
+                <div class="row-wrap" style="gap: 16px; margin-top: 10px;">
+                    {{ qrPlaceholder(112, 'QR kód pro aktuální SFH') }}
+                    <div style="font-size: 0.9rem;">
+                        <b>Aktuální SFH kvíz</b><br/>
+                        <span class="text-muted"><code>https://skautdevs.github.io/bezpecny-navigamus/</code></span><br/>
+                        <span class="text-small text-muted">Účastník naskenuje kód na svém telefonu, vyplní kvíz a obsluha obnoví stav.</span>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <label class="checkin-step">
+            <span class="checkin-step-main">
+                <input type="checkbox">
+                <span>3. Vydat šátek akce (5×)</span>
+            </span>
+            <span class="pill pill-warn">Nevydáno</span>
+        </label>
+
+        <label class="checkin-step">
+            <span class="checkin-step-main">
+                <input type="checkbox">
+                <span>4. Vydat jmenovku / badge (5×)</span>
+            </span>
+            <span class="pill pill-neutral">Volitelný krok</span>
+        </label>
+
+        <label class="checkin-step">
+            <span class="checkin-step-main">
+                <input type="checkbox">
+                <span>5. Kontrola bezinfekčnosti / papírového souhlasu</span>
+            </span>
+            <span class="pill pill-neutral">U osob pod 18 let</span>
+        </label>
+    </div>
+
+    <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 10px;">
+        <label style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.94rem; cursor: pointer;">
+            <input type="checkbox" data-checkin-override>
+            <span><b>Přesto odbavit (výjimka)</b> – zaznamená výjimku u vstupu bez splněného SFH / platby</span>
+        </label>
+        <button type="button" class="btn btn-block btn-accent" data-action="checkin-confirm">
+            <i class="material-icons">how_to_reg</i> Dokončit odbavení vstupu
+        </button>
+    </div>
+</div>

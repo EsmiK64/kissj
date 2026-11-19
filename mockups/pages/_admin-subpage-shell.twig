@@ -1,0 +1,38 @@
+{% extends "_mockup-layout.twig" %}
+
+{% block shell %}
+<header class="admin-topbar">
+    <div class="admin-topbar-brand">
+        <h1><a href="/alt-1-command-tiles.twig" style="text-decoration: none; color: inherit;">kissj Admin</a></h1>
+        <span class="admin-event-badge">Obrok 27</span>
+        <span class="pill pill-info">{{ sectionTitle|default('Přehled') }}</span>
+    </div>
+    <nav class="admin-topbar-meta" aria-label="Hlavní navigace">
+        <a href="/alt-1-command-tiles.twig">Přehled</a>
+        <span>·</span>
+        <a href="/pages/approve.twig">Schvalování</a>
+        <span>·</span>
+        <a href="/pages/payments.twig">Platby</a>
+        <span>·</span>
+        <a href="/pages/entry.twig">Vstup (Entry)</a>
+        <span>·</span>
+        <a href="/pages/participants.twig">Účastníci</a>
+        <span>·</span>
+        <a href="/pages/food.twig">Strava</a>
+        <span>·</span>
+        <a href="/pages/safety.twig">SOS/SZT</a>
+        <span>·</span>
+        <a href="/pages/sfh.twig">SFH</a>
+        <span>·</span>
+        <a href="/pages/programmes.twig">Programy</a>
+        <span>·</span>
+        <a href="/pages/participant-flow.twig">Pohled účastníka</a>
+        <span>·</span>
+        <a href="/pages/backend-gap.twig">Analýza backendu</a>
+    </nav>
+</header>
+
+<main class="admin-container">
+    {% block pageContent %}{% endblock %}
+</main>
+{% endblock %}

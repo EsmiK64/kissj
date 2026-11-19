@@ -1,0 +1,315 @@
+{% extends "_mockup-layout.twig" %}
+{% from "components/_macros.twig" import splitTile %}
+{% set pageTitle = 'Přehled akce – kissj Admin' %}
+
+{% block shell %}
+<header class="admin-topbar">
+    <div class="admin-topbar-brand">
+        <h1>kissj Admin</h1>
+        <span class="admin-event-badge">Obrok 27</span>
+    </div>
+    <div class="admin-topbar-meta">
+        <span>cs | en</span>
+        <span>admin@skaut.cz</span>
+        <a href="#logout">Odhlásit se</a>
+    </div>
+</header>
+
+<main class="admin-container">
+    <div class="role-tabs">
+        <input type="radio" name="role-preview" id="role-top" checked>
+        <input type="radio" name="role-preview" id="role-contingent">
+        <input type="radio" name="role-preview" id="role-checkin">
+        <input type="radio" name="role-preview" id="role-food">
+        <input type="radio" name="role-preview" id="role-safety">
+        <input type="radio" name="role-preview" id="role-programme">
+
+        <div class="role-tab-bar" role="tablist" aria-label="Přepínač role">
+            <label for="role-top" class="role-tab-label">Top Admin</label>
+            <label for="role-contingent" class="role-tab-label">Contingent Admin (CZ)</label>
+            <label for="role-checkin" class="role-tab-label">Check-in (Brána)</label>
+            <label for="role-food" class="role-tab-label">Food Admin</label>
+            <label for="role-safety" class="role-tab-label">Safety / SOS &amp; SZT</label>
+            <label for="role-programme" class="role-tab-label">Programme Admin</label>
+        </div>
+
+        <div class="role-panels">
+            {# ==================== TOP ADMIN ==================== #}
+            <div class="role-panel panel-top">
+                <section class="admin-card">
+                    <div class="admin-card-header">
+                        <h2>Denní operativa &amp; fronty</h2>
+                        <span class="pill pill-ok">Registrace otevřena</span>
+                    </div>
+                    <div class="tile-grid">
+                        {{ splitTile('Schvalování', '8 družin · 4 IST', '12', 'čeká', '/pages/approve.twig') }}
+                        {{ splitTile('Banka & platby', '23 čeká na úhradu', '5', 'nových', '/pages/payments.twig') }}
+                        {{ splitTile('Vstup & Check-in', 'QR skener & brána', '842', 'přijede', '/pages/entry.twig') }}
+                    </div>
+                </section>
+
+                <section class="admin-card">
+                    <div class="admin-card-header">
+                        <h2>Lidé, týmy &amp; nastavení akce</h2>
+                    </div>
+                    <div class="tile-grid">
+                        {{ splitTile('Účastníci & hosté', 'Družiny, IST, TTL, Guest table', '842', 'z 1 200', '/pages/participants.twig') }}
+                        {{ splitTile('Limity, role & pole', 'Kapacity, subcampy, oprávnění', '5', 'rolí', '/pages/roles.twig') }}
+                    </div>
+                </section>
+
+                <section class="admin-card">
+                    <div class="admin-card-header">
+                        <h2>Odborné sekce</h2>
+                    </div>
+                    <div class="tile-grid">
+                        {{ splitTile('Stravování', 'Matice diet, alergie, exporty', '23', 'speciální', '/pages/food.twig') }}
+                        {{ splitTile('Zdraví & SOS/SZT', 'Omezení, léky, kontakty', '18', 'záznamů', '/pages/safety.twig') }}
+                        {{ splitTile('SFH kvíz', 'Kvíz & připravenost akce', '130', 'chybí', '/pages/sfh.twig') }}
+                        {{ splitTile('Programy & sekce', 'Kalendář & sync eventApp', '46', 'bloků', '/pages/programmes.twig') }}
+                    </div>
+                </section>
+
+                <section class="admin-card">
+                    <div class="admin-card-header">
+                        <h2>Stav registrací (842 / 1 200)</h2>
+                        <a href="/pages/roles.twig" class="btn btn-small btn-grey"><i class="material-icons">tune</i> Upravit limity</a>
+                    </div>
+                    <div class="funnel-grid">
+                        <div class="funnel-card">
+                            <div class="funnel-card-title"><span>Družiny (PL)</span><span>101 / 120</span></div>
+                            <div class="funnel-bar">
+                                <div class="funnel-seg-paid" style="width: 53%"></div>
+                                <div class="funnel-seg-approved" style="width: 21%"></div>
+                                <div class="funnel-seg-closed" style="width: 10%"></div>
+                                <div class="funnel-seg-open" style="width: 12%"></div>
+                            </div>
+                            <div class="funnel-legend">
+                                <span><b>64</b> zaplaceno</span><span><b>25</b> schváleno</span><span><b>12</b> zamčeno</span><span><b>14</b> otevřeno</span>
+                            </div>
+                        </div>
+                        <div class="funnel-card">
+                            <div class="funnel-card-title"><span>IST servis</span><span>181 / 250</span></div>
+                            <div class="funnel-bar">
+                                <div class="funnel-seg-paid" style="width: 57%"></div>
+                                <div class="funnel-seg-approved" style="width: 12%"></div>
+                                <div class="funnel-seg-closed" style="width: 3%"></div>
+                                <div class="funnel-seg-open" style="width: 8%"></div>
+                            </div>
+                            <div class="funnel-legend">
+                                <span><b>142</b> zaplaceno</span><span><b>31</b> schváleno</span><span><b>8</b> zamčeno</span><span><b>19</b> otevřeno</span>
+                            </div>
+                        </div>
+                        <div class="funnel-card">
+                            <div class="funnel-card-title"><span>Technické týmy (TTL)</span><span>17 týmů</span></div>
+                            <div class="funnel-bar">
+                                <div class="funnel-seg-paid" style="width: 55%"></div>
+                                <div class="funnel-seg-approved" style="width: 20%"></div>
+                                <div class="funnel-seg-closed" style="width: 10%"></div>
+                                <div class="funnel-seg-open" style="width: 15%"></div>
+                            </div>
+                            <div class="funnel-legend">
+                                <span><b>11</b> zaplaceno</span><span><b>4</b> schváleno</span><span><b>2</b> zamčeno</span><span><b>3</b> otevřeno</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="admin-card">
+                    <div class="admin-card-header">
+                        <h3>Externí aplikace &amp; datové exporty</h3>
+                    </div>
+                    <div class="ecosystem-grid">
+                        <a href="/pages/programmes.twig" class="ecosystem-card" style="text-decoration: none; color: inherit;">
+                            <strong>eventApp (event.skauting.cz)</strong>
+                            <span class="pill pill-ok"><i class="material-icons">sync</i> Aktivní (login přes kissj)</span>
+                            <span class="text-small text-muted">Účastnická aplikace: programy, mapa, oznámení.</span>
+                        </a>
+                        <a href="/pages/future-app.twig" class="ecosystem-card" style="text-decoration: none; color: inherit;">
+                            <strong>IST App (externí)</strong>
+                            <span class="pill pill-warn"><i class="material-icons">build</i> V přípravě mimo jádro</span>
+                            <span class="text-small text-muted">Směny a organizace práce pro šéfy IST na místě.</span>
+                        </a>
+                        <a href="/pages/future-app.twig" class="ecosystem-card" style="text-decoration: none; color: inherit;">
+                            <strong>Exporty &amp; API klíče</strong>
+                            <span class="pill pill-info"><i class="material-icons">download</i> CSV / PDF / API</span>
+                            <span class="text-small text-muted">Hromadné exporty dat a správa API klíčů akce.</span>
+                        </a>
+                        <a href="/pages/backend-gap.twig" class="ecosystem-card" style="text-decoration: none; color: inherit;">
+                            <strong>Analýza backendu (Roadmap)</strong>
+                            <span class="pill pill-warn"><i class="material-icons">fact_check</i> Co už je vs. co chybí</span>
+                            <span class="text-small text-muted">Přehled funkcí připravených v kissj a nových modulů.</span>
+                        </a>
+                        <a href="/pages/participant-flow.twig" class="ecosystem-card" style="text-decoration: none; color: inherit;">
+                            <strong>Pohled účastníka (Registrace)</strong>
+                            <span class="pill pill-info"><i class="material-icons">person</i> Přihlášení → Vstupenka</span>
+                            <span class="text-small text-muted">Kompletní návrh klientské části pro účastníky a vedoucí.</span>
+                        </a>
+                    </div>
+                </section>
+            </div>
+
+            {# ==================== CONTINGENT ADMIN (MINIMAL) ==================== #}
+            <div class="role-panel panel-contingent">
+                <section class="admin-card">
+                    <div class="admin-card-header">
+                        <div>
+                            <h2>Kontingent Česko (Contingent Admin)</h2>
+                            <span class="text-muted">Zjednodušený pohled: pouze schvalování, účastníci a statistiky vlastního kontingentu.</span>
+                        </div>
+                        <span class="pill pill-info">Kontingent: Česko</span>
+                    </div>
+
+                    <div class="tile-grid">
+                        <a href="/pages/approve.twig" class="tile-split">
+                            <div class="tile-split-left">
+                                <div class="tile-split-title">Schvalování (CZ)</div>
+                                <div class="tile-split-sub">Družiny a IST kontingentu</div>
+                            </div>
+                            <div class="tile-split-right">
+                                <span class="tile-split-num">4</span>
+                                <span class="tile-split-unit">čeká</span>
+                            </div>
+                        </a>
+
+                        <a href="/pages/participants.twig" class="tile-split">
+                            <div class="tile-split-left">
+                                <div class="tile-split-title">Účastníci (CZ)</div>
+                                <div class="tile-split-sub">Přehled členů kontingentu</div>
+                            </div>
+                            <div class="tile-split-right">
+                                <span class="tile-split-num">312</span>
+                                <span class="tile-split-unit">lidí</span>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+
+                <section class="admin-card">
+                    <div class="admin-card-header">
+                        <h3>Stav registrací kontingentu Česko</h3>
+                    </div>
+                    <div class="funnel-grid">
+                        <div class="funnel-card">
+                            <div class="funnel-card-title"><span>Družiny (PL)</span><span>42 / 50</span></div>
+                            <div class="funnel-bar">
+                                <div class="funnel-seg-paid" style="width: 60%"></div>
+                                <div class="funnel-seg-approved" style="width: 16%"></div>
+                                <div class="funnel-seg-closed" style="width: 8%"></div>
+                            </div>
+                            <div class="funnel-legend">
+                                <span><b>30</b> zaplaceno</span><span><b>8</b> schváleno</span><span><b>4</b> zamčeno</span>
+                            </div>
+                        </div>
+                        <div class="funnel-card">
+                            <div class="funnel-card-title"><span>IST</span><span>68 / 80</span></div>
+                            <div class="funnel-bar">
+                                <div class="funnel-seg-paid" style="width: 70%"></div>
+                                <div class="funnel-seg-approved" style="width: 15%"></div>
+                            </div>
+                            <div class="funnel-legend">
+                                <span><b>56</b> zaplaceno</span><span><b>12</b> schváleno</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            {# ==================== CHECK-IN (BRÁNA) ==================== #}
+            <div class="role-panel panel-checkin">
+                <section class="admin-card">
+                    <div class="admin-card-header">
+                        <div>
+                            <h2>Vstup &amp; Check-in (Role: Brána)</h2>
+                            <span class="text-muted">Obsluha vidí pouze skener, vyhledání a checklist pro odbavení.</span>
+                        </div>
+                        <a href="/pages/entry.twig" class="btn btn-small btn-grey">Celá obrazovka vstupu</a>
+                    </div>
+
+                    <div class="cta-grid">
+                        <a href="/pages/entry.twig" class="btn btn-accent">
+                            <i class="material-icons">qr_code_scanner</i> Skenovat QR kód účastníka
+                        </a>
+                    </div>
+
+                    <div class="filter-bar">
+                        <input type="search" placeholder="Nebo zadej Tie code / jméno…" aria-label="Tie code">
+                    </div>
+
+                    {% include "components/_checkin-card.twig" %}
+                </section>
+            </div>
+
+            {# ==================== FOOD ADMIN ==================== #}
+            <div class="role-panel panel-food">
+                <section class="admin-card">
+                    <div class="admin-card-header"><h2>Stravování (Role: Food Admin)</h2></div>
+                    <div class="tile-grid">
+                        <a href="/pages/food.twig" class="tile-split">
+                            <div class="tile-split-left">
+                                <div class="tile-split-title">Matice diet &amp; alergie</div>
+                                <div class="tile-split-sub">Přehled pro kuchyni a exporty CSV</div>
+                            </div>
+                            <div class="tile-split-right">
+                                <span class="tile-split-num">23</span>
+                                <span class="tile-split-unit">speciální</span>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+            </div>
+
+            {# ==================== SAFETY / SOS & SZT ==================== #}
+            <div class="role-panel panel-safety">
+                <section class="admin-card">
+                    <div class="admin-card-header"><h2>Bezpečnost &amp; Zdraví (Role: SOS / SZT)</h2></div>
+                    <div class="tile-grid">
+                        <a href="/pages/safety.twig" class="tile-split">
+                            <div class="tile-split-left">
+                                <div class="tile-split-title">Zdravotní data &amp; SOS</div>
+                                <div class="tile-split-sub">Alergie, léky, nouzové kontakty</div>
+                            </div>
+                            <div class="tile-split-right">
+                                <span class="tile-split-num">18</span>
+                                <span class="tile-split-unit">záznamů</span>
+                            </div>
+                        </a>
+                        <a href="/pages/sfh.twig" class="tile-split">
+                            <div class="tile-split-left">
+                                <div class="tile-split-title">SFH připravenost</div>
+                                <div class="tile-split-sub">Kvízy a nesplněné přípravy</div>
+                            </div>
+                            <div class="tile-split-right">
+                                <span class="tile-split-num">130</span>
+                                <span class="tile-split-unit">chybí</span>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+            </div>
+
+            {# ==================== PROGRAMME ADMIN ==================== #}
+            <div class="role-panel panel-programme">
+                <section class="admin-card">
+                    <div class="admin-card-header">
+                        <h2>Programy (Role: Programme Admin)</h2>
+                        <span class="pill pill-ok"><i class="material-icons">sync</i> eventApp aktivní</span>
+                    </div>
+                    <div class="tile-grid">
+                        <a href="/pages/programmes.twig" class="tile-split">
+                            <div class="tile-split-left">
+                                <div class="tile-split-title">Programy &amp; sekce</div>
+                                <div class="tile-split-sub">Kalendář, okno, prezenčky</div>
+                            </div>
+                            <div class="tile-split-right">
+                                <span class="tile-split-num">46</span>
+                                <span class="tile-split-unit">bloků</span>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

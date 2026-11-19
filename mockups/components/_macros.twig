@@ -1,0 +1,27 @@
+{% macro splitTile(title, sub, num, unit, href, tag) %}
+    {% set el = tag|default('a') %}
+    <{{ el }}
+        {% if el == 'a' %}href="{{ href|default('#') }}"{% endif %}
+        {% if el == 'button' %}type="button" data-action="toast"{% endif %}
+        {% if el == 'label' %}for="{{ href }}"{% endif %}
+        class="tile-split"
+    >
+        <div class="tile-split-left">
+            <div class="tile-split-title">{{ title }}</div>
+            <div class="tile-split-sub">{{ sub }}</div>
+        </div>
+        <div class="tile-split-right">
+            <span class="tile-split-num">{{ num }}</span>
+            <span class="tile-split-unit">{{ unit }}</span>
+        </div>
+    </{{ el }}>
+{% endmacro %}
+
+{% macro qrPlaceholder(size, label) %}
+    <div class="qr-box">
+        <svg width="{{ size|default(128) }}" height="{{ size|default(128) }}" viewBox="0 0 21 21" shape-rendering="crispEdges" role="img" aria-label="{{ label|default('QR kód') }}">
+            <rect width="21" height="21" fill="#ffffff"/>
+            <path fill="#111111" d="M1,1h7v7h-7z M2,2v5h5v-5z M3,3h3v3h-3z M13,1h7v7h-7z M14,2v5h5v-5z M15,3h3v3h-3z M1,13h7v7h-7z M2,14v5h5v-5z M3,15h3v3h-3z M9,2h1v2h-1z M11,1h1v3h-1z M9,5h2v1h-2z M10,7h2v2h-2z M1,9h2v1h-2z M4,9h3v2h-3z M8,10h3v1h-3z M12,9h2v2h-2z M15,9h2v1h-2z M18,9h2v2h-2z M9,12h2v2h-2z M12,12h3v1h-3z M16,12h2v2h-2z M19,13h1v3h-1z M10,15h2v2h-2z M13,14h2v3h-2z M16,16h3v2h-3z M9,18h2v2h-2z M12,18h2v2h-2z M15,19h2v1h-2z M18,19h2v1h-2z"/>
+        </svg>
+    </div>
+{% endmacro %}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="{{ locale|default('cs') }}">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{{ pageTitle|default('Admin – kissj') }}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/mockups.css">
+    <link rel="stylesheet" href="/calendar.css">
+    <link rel="stylesheet" href="" id="event-theme-link">
+    <script src="/mockups.js" defer></script>
+</head>
+<body class="mockup-body {% block bodyClass %}{% endblock %}">
+
+<div class="theme-preview-bar">
+    <label for="event-theme-switcher"><strong>Motiv akce (eventSpecificCss):</strong></label>
+    <select id="event-theme-switcher" class="modern-select" style="height: 32px; padding: 2px 32px 2px 10px; font-size: 0.85rem;">
+        <option value="">Výchozí kissj</option>
+        <option value="/eventSpecificCss/stylesObrok27.css">Obrok 27</option>
+        <option value="/eventSpecificCss/stylesCej26.css">CEJ 26</option>
+        <option value="/eventSpecificCss/stylesNavigamus27.css">Navigamus 27</option>
+        <option value="/eventSpecificCss/stylesKorbo.css">Korbo</option>
+        <option value="/eventSpecificCss/stylesJj25.css">JJ 25</option>
+    </select>
+</div>
+
+{% block shell %}{% endblock %}
+
+</body>
+</html>
