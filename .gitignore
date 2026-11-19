@@ -31,3 +31,7 @@ deploy/dev/*.tgz
 *.swo
 *~
 .php-cs-fixer.cache
+
+.agents/*
+.gitignore
+/mockups/dist/
